@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<MangaTitle> unit tests > should be match snapshot 1`] = `
+"<nav-stub></nav-stub>
+<div class=\\"content\\">
+  <section class=\\"manga-title\\">
+    <!--v-if-->
+  </section>
+  <div class=\\"manga-title__content\\">
+    <!--v-if-->
+    <div class=\\"manga-title__social-media\\"></div>
+  </div>
+</div>
+<loader-stub></loader-stub>
+<footer-stub></footer-stub>"
+`;

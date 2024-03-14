@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>icon_close_white</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon_close_white" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M12.125,1 L12.125,1 C12.7463203,1 13.25,1.50367966 13.25,2.125 L13.25,22.375 C13.25,22.9963203 12.7463203,23.5 12.125,23.5 L12.125,23.5 C11.5036797,23.5 11,22.9963203 11,22.375 L11,2.125 C11,1.50367966 11.5036797,1 12.125,1 Z" id="Rectangle" fill="#FFFFFF" transform="translate(12.125000, 12.250000) rotate(-45.000000) translate(-12.125000, -12.250000) "></path>
+        <path d="M12.125,1 L12.125,1 C12.7463203,1 13.25,1.50367966 13.25,2.125 L13.25,22.375 C13.25,22.9963203 12.7463203,23.5 12.125,23.5 L12.125,23.5 C11.5036797,23.5 11,22.9963203 11,22.375 L11,2.125 C11,1.50367966 11.5036797,1 12.125,1 Z" id="Rectangle" fill="#FFFFFF" transform="translate(12.125000, 12.250000) rotate(-315.000000) translate(-12.125000, -12.250000) "></path>
+    </g>
+</svg>

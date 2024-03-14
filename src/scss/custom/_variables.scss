@@ -1,0 +1,24 @@
+:root {
+    --color-white: #fff;
+    --color-black: #191919;
+    --color-gray: #505050;
+    --color-dark-gray: #323232;
+    --color-dark-red: #5d0914;
+    --color-gray-dk: #1a1a1a;
+    --color-gray-lt: #6e6e6e;
+    --color-gray-hlt: #e6e6e6;
+    --color-gray-p: #f6f6f6;
+    --color-green: #51c300;
+    --color-red: #dc0914;
+    --color-menu: #b00914;
+    --color-yellow: #ffd600;
+    --color-small-impact: #bebebe;
+
+    --brd-top-size: 5px;
+    --height-nav: 10rem;
+
+}
+//breakpoints
+$bp-large: 90em;
+$bp-medium: 56.25em;
+$bp-small: 37.5em;

@@ -1,0 +1,104 @@
+.top-ranking {
+    min-height: 80vh;
+    width: 100%;
+    background: rgb(13, 13, 13);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.4rem;
+
+    @media (width <= 800px) {
+        flex-direction: column;
+    }
+
+    &__item {
+        transition: transform .2s ease-in;
+        will-change: transform;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(250%, -50%);
+            margin: auto;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background-color: rgb(13, 13, 13);
+            background-color: var(--color-black);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        &:hover {
+            transform: scale(1.08);
+        }
+    }
+
+    &__image {
+        border-radius: 4px;
+        width: 24rem;
+        background-position: center;
+        background-size: contain;
+    }
+
+    &__item {
+        &:nth-child(1) {
+            order: 1;
+
+            @media (width <= 800px) {
+                order: 0;
+                margin-top: 4rem; 
+            }
+
+            .top-ranking__image {
+                border: 6px solid transparent;
+                border-image: linear-gradient(to top right, #FFD700, #9a8616, #bdad51);
+                border-image-slice: 1;
+            }
+
+            &::after {
+                border: 2px solid #FFD700;
+                background-image: url('https://res.cloudinary.com/dlejpqwlh/image/upload/v1696354935/first_leptg7.png');
+            }
+        }
+    }
+
+    &__item {
+        &:nth-child(2) {
+            order: 0;
+
+            .top-ranking__image {
+                border: 5px solid transparent;
+                border-image: linear-gradient(to top right, #6e6e6e, #ececec, #7a7a7a);
+                border-image-slice: 1;
+
+            }
+
+            &::after {
+                border: 2px solid #9D9D9D;
+                background-image: url('https://res.cloudinary.com/dlejpqwlh/image/upload/v1696354935/second_j4qlzi.png');
+            }
+        }
+    }
+
+    &__item {
+        &:nth-child(3) {
+            order: 2;
+
+            .top-ranking__image {
+                border: 5px solid transparent;
+                border-image: linear-gradient(to top right, #B25822, #734f38, #c77a4b);
+                border-image-slice: 1;
+            }
+
+            &::after {
+                border: 2px solid #B25822;
+                background-image: url('https://res.cloudinary.com/dlejpqwlh/image/upload/v1696354935/third_vjramk.png');
+            }
+        }
+    }
+}

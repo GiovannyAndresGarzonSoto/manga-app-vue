@@ -1,0 +1,145 @@
+.list-content{
+    background-color: #0D0D0D;
+    height: 100%;
+    color: var(--color-white);
+    min-height: 70vh;
+
+    &__header{
+        background: linear-gradient(to right, #010101, #0D0D0D);        
+        padding: 2.4rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__title{
+        font-weight: 600;
+        font-size: 2rem;
+    }
+
+    &__options{
+        width: 24rem;
+        display: flex;
+        justify-content: space-around;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--color-small-impact);
+    }
+
+    &__main{
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(8rem, 14rem));
+        place-content: center;
+        column-gap: 1.6rem;
+        row-gap: 1.6rem;
+        padding: 1.6rem 6rem 4rem 6rem;
+
+
+        @media (width <= 700px) {
+            padding: .8rem;
+        }
+
+        @media (width <= 500px) {
+            padding: .4rem;
+        }
+
+        @media (width <= 400px) {
+            padding: .2rem;
+        }
+    }
+
+    &__search{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content:  center;
+        align-items: center;
+        background-color: inherit;
+
+        &-input{
+            width: 90vw;
+            height: 5.6rem;
+            border: none;
+            border-bottom: 1px solid #adadad;
+            outline: none;
+            font-size: 1.6rem;
+            background: linear-gradient(90deg, #0D0D0D 0%, rgba(25,25,25,1) 49%, #0D0D0D 100%) !important; //!important           
+            caret-color: #adadad;
+            color: #adadad;
+            padding: .8rem;
+            position: relative;
+            text-align: center;
+            font-weight: 700;
+
+
+            &::placeholder {
+                content: "Buscar por serie o autor";
+                text-align: center;
+                font-weight: 700;
+                letter-spacing: 2px;
+                font-size: 2.2rem;
+            }
+
+            &::after{
+                content: "";
+                position: absolute;
+                background-image: url('https://res.cloudinary.com/dlejpqwlh/image/upload/v1696355673/search_iopqyz.svg');
+                width: 2.4rem;
+                height: 2.4rem;
+
+            }
+        }
+    }
+
+    &__title-manga{
+        margin-top: 2.4rem;
+        height: 24rem;
+
+        .list-content__image{
+            transition: transform .2s linear;
+        }
+
+
+        &:hover{
+            .list-content__image{
+                transform: translateY(-8px);
+            }
+
+            .list-content__name{
+                color: #ffd600;
+            }
+            
+            .list-content__author{
+                color: var(--color-small-impact);
+            }
+        }
+    }
+
+    &__image{
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 80%;
+        width: 100%;
+    }
+
+    &__info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: .6rem 0;
+    }
+
+    &__name{
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
+
+    &__author{
+        font-weight: 400;
+        font-size: 1.1rem;
+        color: var(--color-gray-lt);
+    }
+}
