@@ -13,6 +13,4 @@ describe('<MangaTitle> unit tests', () => {
         const div = wrapper.find('div.content')
         assert.ok(div.exists())
     })
-
-    
 })

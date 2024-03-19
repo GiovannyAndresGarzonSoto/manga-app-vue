@@ -3,7 +3,25 @@
         <div class="pages">
             <div v-for="_ in pages" ref="pageViewer" class="pages__page">
             </div>
+
+            <div class="end">
+                <div class="chapter">
+                    <a class="chapter__next">Al capítulo #002</a>
+                    <img src="" ref="chapterCover" class="chapter__cover">
+                </div>
+
+                <div class="actions">
+                    <a class="actions__fav">Enviar a favoritos
+                        <BooksIcon />
+                    </a>
+                   
+                    <a class="actions__comments">Comentarios 
+                        <CommentsIcon /> 
+                    </a>
+                </div>
+            </div>
         </div>
+
         <div ref="wrapper" class="wrapper" @click="toggleWrapper">
             <div class="wrapper__logo-box">
                 <img @click="toMain" class="wrapper__img" src="../../public/logo.png" alt="logo">
@@ -53,11 +71,12 @@
 import { useRoute } from 'vue-router'
 import { axios } from '../config'
 import { defineComponent, onMounted, ref } from 'vue'
-import { useTo } from '../hooks'
+import { useFavs, useTo } from '../hooks'
 import { useRouter, Router } from 'vue-router'
 import { ChapterI } from '../interfaces'
 import CommentsIcon from '../components/CommentsIcon.vue'
 import MenuDotsIcon from '../components/MenuDotsIcon.vue'
+import BooksIcon from '../components/BooksIcon.vue'
 
 export default defineComponent({
     name: 'viewer',
@@ -67,6 +86,8 @@ export default defineComponent({
     setup() {
         const route = useRoute()
         const pages = ref([])
+        const manga = ref()
+        const chapterCover = ref<HTMLImageElement>()
         const pageViewer = ref()
         const wrapper = ref<HTMLDivElement>()
         const router: Router = useRouter()
@@ -82,11 +103,21 @@ export default defineComponent({
             { label: 'Alto', value: 'high' }
         ]
 
+        const { checkFavs, addToFavs, removeFav, getFavs, isFav } = useFavs()
+
         const getPagesByChapter = async () => {
             const { data } = await axios.get(`/pages/chapter/${route.params.chapterId}`)
             pages.value = data.data.pages
             chapter.value = data.data.chapter
+            await getManga()
             renderPages(selectedQuality.value)
+        }
+
+        const getManga = async () => {
+            const { data } = await axios.get(`/manga/${chapter.value.manga}`)
+            manga.value = data.data.manga
+            console.log(manga.value)
+            // chapterCover.value.src = manga.value.images.cover
         }
 
         const changeQuality = (quality) => {
@@ -133,11 +164,13 @@ export default defineComponent({
         }
 
         onMounted(async () => {
-            getPagesByChapter()
+            await getPagesByChapter()
         })
 
         return {
             pages,
+            manga,
+            chapterCover,
             pageViewer,
             wrapper,
             toMain,
@@ -150,7 +183,8 @@ export default defineComponent({
             menuContainer,
             selectedQuality,
             toggleWrapper,
-            isMenuActive
+            isMenuActive,
+            checkFavs, addToFavs, removeFav, getFavs, isFav
         }
     }
 })
