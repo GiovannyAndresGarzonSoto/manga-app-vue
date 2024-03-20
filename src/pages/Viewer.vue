@@ -5,19 +5,25 @@
             </div>
 
             <div class="end">
-                <div class="chapter">
-                    <a class="chapter__next">Al capítulo #002</a>
-                    <img src="" ref="chapterCover" class="chapter__cover">
-                </div>
+                <div class="end-content">
+                    <div class="chapter">
+                        <a class="chapter__next">Al capítulo #002</a>
+                        <img src="" ref="chapterCover" class="chapter__cover">
+                    </div>
 
-                <div class="actions">
-                    <a class="actions__fav">Enviar a favoritos
-                        <BooksIcon />
-                    </a>
-                   
-                    <a class="actions__comments">Comentarios 
-                        <CommentsIcon /> 
-                    </a>
+                    <div class="actions">
+                        <a class="actions__fav" v-if="!isFav" @click="addToFavs(manga._id)">Enviar a favoritos
+                            <BooksIcon />
+                        </a>
+
+                        <a class="actions__fav" v-if="isFav" @click="removeFav(manga._id)">Favorito
+                            <CheckIcon />
+                        </a>
+                    
+                        <a class="actions__comments">Comentarios 
+                            <CommentsIcon /> 
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,12 +77,13 @@
 import { useRoute } from 'vue-router'
 import { axios } from '../config'
 import { defineComponent, onMounted, ref } from 'vue'
-import { useFavs, useTo } from '../hooks'
+import { useCompressImg, useFavs, useTo } from '../hooks'
 import { useRouter, Router } from 'vue-router'
-import { ChapterI } from '../interfaces'
+import { ChapterI, MangaI, PageI } from '../interfaces'
 import CommentsIcon from '../components/CommentsIcon.vue'
 import MenuDotsIcon from '../components/MenuDotsIcon.vue'
 import BooksIcon from '../components/BooksIcon.vue'
+import CheckIcon from '../components/CheckIcon.vue'
 
 export default defineComponent({
     name: 'viewer',
@@ -85,8 +92,8 @@ export default defineComponent({
     },
     setup() {
         const route = useRoute()
-        const pages = ref([])
-        const manga = ref()
+        const pages = ref<PageI[]>([])
+        const manga = ref<MangaI>()
         const chapterCover = ref<HTMLImageElement>()
         const pageViewer = ref()
         const wrapper = ref<HTMLDivElement>()
@@ -109,15 +116,15 @@ export default defineComponent({
             const { data } = await axios.get(`/pages/chapter/${route.params.chapterId}`)
             pages.value = data.data.pages
             chapter.value = data.data.chapter
-            await getManga()
             renderPages(selectedQuality.value)
         }
 
         const getManga = async () => {
             const { data } = await axios.get(`/manga/${chapter.value.manga}`)
-            manga.value = data.data.manga
-            console.log(manga.value)
-            // chapterCover.value.src = manga.value.images.cover
+            manga.value = data.data
+            const url = manga.value.images.background
+            const { urlCompressed } = useCompressImg(url, 20)
+            chapterCover.value.src = urlCompressed
         }
 
         const changeQuality = (quality) => {
@@ -165,6 +172,10 @@ export default defineComponent({
 
         onMounted(async () => {
             await getPagesByChapter()
+            await getManga()
+            getFavs()
+            checkFavs(manga.value?._id)
+            console.log('test', manga.value?._id)
         })
 
         return {
