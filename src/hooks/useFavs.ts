@@ -8,7 +8,7 @@ export const useFavs = () => {
     const addToFavs = (mangaId: string) => {
         if (!favs.value.includes(mangaId)) {
             favs.value = [...favs.value, mangaId]
-            localStorage.setItem('favs', JSON.stringify(!favs.value))
+            localStorage.setItem('favs', JSON.stringify(favs.value))
         }
         isFav.value = true
     }
