@@ -54,6 +54,36 @@
         height: 38rem;
     }
 
+    &__premium {
+        p{
+            font-size: 1.4rem;
+        }
+
+        a{
+            margin-top: 1.6rem;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            letter-spacing: 3px;
+            width: 20rem;
+            border: 1px solid var(--color-yellow);
+            border-radius: 6px;
+            padding: 1.1rem;
+            text-decoration: none;
+            color: var(--color-yellow);
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            transition: all .4s ease;
+    
+            &:hover {
+                letter-spacing: 1px;
+            }
+        }
+    }
+
     &__fav {
         font-size: 1.2rem;
         display: flex;

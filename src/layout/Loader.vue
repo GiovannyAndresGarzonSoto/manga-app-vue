@@ -20,9 +20,13 @@ export default defineComponent({
 .loader{
     margin-top: var(--height-nav);
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -200vh;
     background: rgb(13,13,13);
     z-index: 1;
+
 
     &__title{
         margin-top: 4rem;

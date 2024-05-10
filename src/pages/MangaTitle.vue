@@ -49,7 +49,11 @@
                 <h4 v-if="manga.state === 'complete'" class="manga-title__title-state">
                     Manga finalizado
                 </h4>
-                <div class="manga-title__card" v-for="chapter in chapters" @click="toViewer(chapter._id)">
+                <div class="manga-title__premium">
+                    <p>Para tener acceso a todos los capítulos es necesario tener cuenta premium</p>
+                    <a>Obtener Premium 5.000clp</a>
+                </div>
+                <div class="manga-title__card" disabled v-for="chapter in chapters" @click="toViewer(chapter._id)">
                     <div ref="pageChapter" v-if="chapter.pageImage" class="manga-title__card-image"></div>
                     <div class="manga-title__card-content">
                         <span class="manga-title__card-number" v-if="Number(chapter.number) < 10">#00{{ chapter.number
@@ -74,7 +78,7 @@
         </div>
     </div>
 
-    <Loader v-show="!isContentLoaded" />
+    <Loader v-show="!isContentLoaded"  />
 
     <Footer />
 </template>
@@ -148,12 +152,10 @@ export default defineComponent({
             setTimeout(() => {
                 pageChapter.value.forEach((e, i) => {
                     const url = chapters.value[i].pageImage
-                    const { urlCompressed } = useCompressImg(url, 20)
-                    setTimeout(() => {
+                    const { urlCompressed } = useCompressImg(url, .1)
                         e.style.backgroundImage = `url(${urlCompressed})`
-                    }, 1200 * i)
                 })
-            }, 2400)
+            }, 800)
         }
 
         const formattedPremiere = (premiere: Date) => {
