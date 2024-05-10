@@ -5,7 +5,7 @@
             </div>
 
             <div class="end">
-                <div class="end-content">
+                <div class="end-content" ref="endContent">
                     <div class="chapter">
                         <a class="chapter__next">Al capítulo #002</a>
                         <img src="" ref="chapterCover" class="chapter__cover">
@@ -13,22 +13,19 @@
 
                     <div class="actions">
                         <a class="actions__fav" v-if="!isFav" @click="addToFavs(manga._id)">Enviar a favoritos
-                            <BooksIcon />
                         </a>
 
                         <a class="actions__fav" v-if="isFav" @click="removeFav(manga._id)">Favorito
-                            <CheckIcon />
                         </a>
                     
-                        <a class="actions__comments">Comentarios 
-                            <CommentsIcon /> 
-                        </a>
+                        <!-- <a class="actions__comments">Comentarios 
+                        </a> -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <div ref="wrapper" class="wrapper" @click="toggleWrapper">
+        <div ref="wrapper" class="wrapper">
             <div class="wrapper__logo-box">
                 <img @click="toMain" class="wrapper__img" src="../../public/logo.png" alt="logo">
                 <!-- <div class="wrapper_container">
@@ -38,7 +35,7 @@
                 <!-- </div> -->
             </div>
 
-            <div class="wrapper__menu" @click="toggleMenu">
+            <div class="wrapper__menu"  @click="toggleMenu">
                 <MenuDotsIcon />
                 <div v-if="isMenuActive" class="wrapper__container" ref="menuContainer">
                     <h3 class="wrapper__container-title">Dirección De Lectura</h3>
@@ -71,6 +68,7 @@
             </div> -->
         </div>
     </div>
+
 </template>
 
 <script lang="ts">
@@ -82,13 +80,11 @@ import { useRouter, Router } from 'vue-router'
 import { ChapterI, MangaI, PageI } from '../interfaces'
 import CommentsIcon from '../components/CommentsIcon.vue'
 import MenuDotsIcon from '../components/MenuDotsIcon.vue'
-import BooksIcon from '../components/BooksIcon.vue'
-import CheckIcon from '../components/CheckIcon.vue'
 
 export default defineComponent({
     name: 'viewer',
     components: {
-        CommentsIcon, MenuDotsIcon
+        CommentsIcon, MenuDotsIcon,
     },
     setup() {
         const route = useRoute()
@@ -104,6 +100,7 @@ export default defineComponent({
         const menuContainer = ref()
         const selectedQuality = ref('medium')
         const { toMain } = useTo(router)
+        const endContent = ref<HTMLElement>(null)
         const qualityOptions = [
             { label: 'Bajo', value: 'low' },
             { label: 'Medio', value: 'medium' },
@@ -154,10 +151,10 @@ export default defineComponent({
 
         const toggleWrapper = () => {
             if (isWrapperActive.value === false) {
-                // wrapper.value.style.display = 'block'
+                wrapper.value.style.display = 'block'
                 isWrapperActive.value = true
             } else {
-                // wrapper.value.style.display = 'none'
+                wrapper.value.style.display = 'none'
                 isWrapperActive.value = false
             }
         }
@@ -175,7 +172,9 @@ export default defineComponent({
             await getManga()
             getFavs()
             checkFavs(manga.value?._id)
-            console.log('test', manga.value?._id)
+            setTimeout(() => {
+                endContent.value.style.opacity = "1"
+            }, 800)
         })
 
         return {
@@ -195,6 +194,7 @@ export default defineComponent({
             selectedQuality,
             toggleWrapper,
             isMenuActive,
+            endContent,
             checkFavs, addToFavs, removeFav, getFavs, isFav
         }
     }

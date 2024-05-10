@@ -51,9 +51,9 @@
                 </h4>
                 <div class="manga-title__premium">
                     <p>Para tener acceso a todos los capítulos es necesario tener cuenta premium</p>
-                    <a>Obtener Premium 5.000clp</a>
+                    <a>Premium pronto</a>
                 </div>
-                <div class="manga-title__card" disabled v-for="chapter in chapters" @click="toViewer(chapter._id)">
+                <div class="manga-title__card" disabled v-for="(chapter, i) in chapters" :key="i" @click="i === 0 ? toViewer(chapter._id) : null">
                     <div ref="pageChapter" v-if="chapter.pageImage" class="manga-title__card-image"></div>
                     <div class="manga-title__card-content">
                         <span class="manga-title__card-number" v-if="Number(chapter.number) < 10">#00{{ chapter.number
@@ -141,7 +141,7 @@ export default defineComponent({
             const { data } = await axios.get(`/author/${manga.value.author}`)
             author.value = data.data
         }
-
+ 
         const renderManga = () => {
             const { urlCompressed: portraitCompress } = useCompressImg(manga.value?.images.cover, 60)
             const { urlCompressed: mangaTitleCompress } = useCompressImg(manga.value?.images.background, 60)
@@ -151,6 +151,9 @@ export default defineComponent({
             mangaTitle.value.style.background = `url(${mangaTitleCompress}) rgba(0, 0, 0)`
             setTimeout(() => {
                 pageChapter.value.forEach((e, i) => {
+                    if(i >= 1) {
+                        e.style.opacity = '.2'
+                    }
                     const url = chapters.value[i].pageImage
                     const { urlCompressed } = useCompressImg(url, .1)
                         e.style.backgroundImage = `url(${urlCompressed})`

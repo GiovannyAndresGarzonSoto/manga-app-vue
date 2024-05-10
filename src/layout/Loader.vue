@@ -1,5 +1,5 @@
 <template>
-    <div class="loader">
+    <div ref="loader" class="loader">
         <p class="loader__title">Cargando...</p>
     </div>
 </template>
@@ -25,7 +25,7 @@ export default defineComponent({
     right: 0;
     bottom: -200vh;
     background: rgb(13,13,13);
-    z-index: 1;
+    z-index: 1000;
 
 
     &__title{
