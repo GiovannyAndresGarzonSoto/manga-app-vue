@@ -17,6 +17,5 @@ export default defineComponent({
     components: {
         Nav, Hero, Footer, Main
     }
-
 })
 </script>
