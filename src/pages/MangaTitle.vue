@@ -56,10 +56,10 @@
                 <div class="manga-title__card" disabled v-for="(chapter, i) in chapters" :key="i" @click="i === 0 ? toViewer(chapter._id) : null">
                     <div ref="pageChapter" v-if="chapter.pageImage" class="manga-title__card-image"></div>
                     <div class="manga-title__card-content">
-                        <span class="manga-title__card-number" v-if="Number(chapter.number) < 10">#00{{ chapter.number
-                        }}</span>
-                        <span class="manga-title__card-number" v-else-if="Number(chapter.number) < 100">#0{{ chapter.number
-                        }}</span>
+                        <span class="manga-title__card-number" v-if="Number(chapter.number) < 10">
+                        #00{{ chapter.number}}</span>
+                        <span class="manga-title__card-number" v-else-if="Number(chapter.number) < 100">
+                        #0{{ chapter.number }}</span>
                         <span class="manga-title__card-number" v-else>#{{ chapter.number }}</span>
 
                         <span class="manga-title__card-title">
@@ -158,7 +158,7 @@ export default defineComponent({
                     const { urlCompressed } = useCompressImg(url, .1)
                         e.style.backgroundImage = `url(${urlCompressed})`
                 })
-            }, 800)
+            }, 100)
         }
 
         const formattedPremiere = (premiere: Date) => {
