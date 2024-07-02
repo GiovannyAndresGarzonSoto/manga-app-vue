@@ -15,7 +15,7 @@ import Footer from '../layout/Footer.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: 'Home',
+    name: '404',
     components: {
         Nav, Footer
     }

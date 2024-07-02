@@ -22,7 +22,7 @@
                     For more information check https://aebs.or.jp/.</p>
             </div>
         </div>
-        <div class="footer__apps">
+        <div class="footer__logo">
             <!-- <img @click="toMain" class="footer__logo" src="../../public/logo.png" alt="logo">
             <span>©︎2019 Shueisha Inc.</span>
             <span>Todos los derechos reservados.</span> -->
