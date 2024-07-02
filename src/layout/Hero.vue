@@ -6,8 +6,8 @@
       <img class="hero__poster" ref="image3" />
     </div>
     <div class="toggle">
-      <span class="toggle__first toggle__active"></span>
-      <span class="toggle__second"></span>
+      <div class="toggle__first toggle__active" ref="firstToggle" @click="toggleFirst"></div>
+      <div class="toggle__second custom" ref="secondToggle" @click="toggleSecond"></div>
     </div>
   </div>
 </template>
@@ -26,6 +26,8 @@ export default defineComponent({
     const image2 = ref<HTMLImageElement>()
     const image3 = ref<HTMLImageElement>()
     const banner = ref<HTMLDivElement>()
+    const firstToggle = ref<HTMLDivElement>()
+    const secondToggle = ref<HTMLDivElement>()
 
     const getAndSetPosters = async () => {
       const { data } = await axios.get('/poster')
@@ -40,11 +42,35 @@ export default defineComponent({
       isPostersReady.value = true
     })
 
+    const togglePoster = () => {
+      console.log('togglePoster')
+      if (firstToggle.value && secondToggle.value) {
+        firstToggle.value.classList.toggle('toggle__active');
+        secondToggle.value.classList.toggle('toggle__active');
+      }
+    }
+
+    const toggleFirst = () => {
+      console.log('firstToggle')
+      if (firstToggle.value.classList.contains('toggle__active')) {
+        togglePoster()
+      }
+    }
+
+    const toggleSecond = () => {
+      console.log('secondToggle')
+      if (secondToggle.value.classList.contains('toggle__active')) {
+        togglePoster()
+      }
+    }
+
     return {
       posters,
       isPostersReady,
       banner,
-      image1, image2, image3
+      image1, image2, image3,
+      firstToggle, secondToggle,
+      toggleFirst, toggleSecond
     }
   }
 })
@@ -111,21 +137,21 @@ export default defineComponent({
   right: .8rem;
   display: flex;
   background-color: black;
-  border-radius: 4px;
+  border-radius: 8px;
   margin: 2.4rem;
   justify-content: space-around;
   align-items: center;
 
   &>* {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.2rem;
+    height: 1.2rem;
     border-radius: 8px;
     background-color: rgb(159, 159, 148);
   }
 
   &__active {
     width: 3.2rem;
-    height: 1.4rem;
+    height: 1.2rem;
     border-radius: 8px;
     background-color: yellow;
   }
